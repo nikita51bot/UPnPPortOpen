@@ -1,0 +1,3 @@
+name: UPnPPortOpen
+version: '1.8'
+main: ru.nikita51.upnpportopen.UPnPPortOpen
