@@ -7,10 +7,11 @@ def mavenRepoUsername = System.getenv("mvn-repo-username")
 def mavenRepoPassword = System.getenv("mvn-repo-token")
 
 group = 'ru.nikita51'
-version = '1.8-1.1'
+version = '1.8-1.1.1'
 
 repositories {
     mavenCentral()
+    maven { url 'https://jitpack.io' }
     maven {
         name = "spigotmc-repo"
         url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
@@ -28,7 +29,7 @@ dependencies {
         exclude group: "junit", module: "junit"
         exclude group: "org.yaml", module: 'snakeyaml'
     }
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.github.nikita51bot:WaifUPnP:4055494102'
 }
 
 def targetJavaVersion = 8
@@ -50,8 +51,10 @@ tasks.withType(JavaCompile).configureEach {
 
 jar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    configurations.implementation.setCanBeResolved(true)
+    println(configurations.implementation.forEach {println(it)})
     from {
-        configurations.runtimeClasspath.findAll { it.name.endsWith('jar') }.collect { zipTree(it) }
+        configurations.implementation.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
 
