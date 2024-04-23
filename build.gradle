@@ -75,7 +75,7 @@ publishing {
     repositories {
         maven {
             name = "whitebeef-repository"
-            url = "https://mvn.whitebeef.ru/releases"
+            url = "https://mvn.wbif.ru/releases"
             credentials {
                 username = mavenRepoUsername
                 password = mavenRepoPassword
